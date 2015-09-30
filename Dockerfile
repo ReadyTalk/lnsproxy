@@ -17,12 +17,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 ADD run.sh /run.sh
-RUN chmod +x /*.sh
+RUN chmod +x /*.sh && mkdir /templates && chmod 775 /templates
 
 VOLUME ["/var/cache/nginx"]
 
 EXPOSE 443
 
-ADD nginx.conf /etc/nginx/nginx.conf
+ADD nginx.conf /templates/nginx.conf
 
 CMD ["/run.sh"]
